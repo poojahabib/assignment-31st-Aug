@@ -1,0 +1,142 @@
+-------=== ORDER MANAGEMENT SYSTEM ===--------
+
+ ENUMS
+=======
+--> UserState
+    - NEW
+    - Already Registered
+
+--> OrderStatus
+    - CREATE
+    - SHIPPED
+    - DELIVERED
+    - PAID
+
+--> PaymentType
+    - COD
+    - UPI
+    - NETBANKING
+
+--> DeliveryMode
+    -STANDARD
+    -EXPRESS
+
+ 
+ INTERFACES
+=============
+--> UserDataDAO
+    +getUserData()
+    +addUserData()
+    +updateUserData()
+    +deleteUserData()
+    +modifyUserState(UserState state)
+
+--> InventoryDataDAO()
+    +getItems()
+    +updateItems()
+    +addItems()
+    +deleteItems()
+
+ ABSTRACT CLASSES
+===================
+--> UserServices 
+    +abstract login()
+    +abstract signUp()
+    +abstract updateProfile()
+    +abstract updateAccessRights()
+    +abstract updateShippingDetails()
+    +abstract updatePaymentMode()
+
+ CLASSES
+=========
+--> User extends UserServices implements UserDataDAO
+    -String userId 
+    -String userName 
+    -String password
+    -long contactNo 
+    -userState: UserState
+
+    +login()
+    +signUp()
+    +updateProfile()
+    +updateAccessRights()
+    +updateShippingDetails()
+    +updatePaymentMode() 
+    +getUserData()
+    +addUserData()
+    +updateUserData()
+    +deleteUserData()
+    +modifyUserState(UserState state)
+
+--> Customer extends User
+    -String deliveryAddress
+    -paymentMode: PaymentType
+    
+    +login()
+    +signUp()
+    +updateProfile()
+    +updateShippingDetails(String deliveryAddress)
+    +updatePaymentMode(PaymentType paymentMode)  
+
+--> Admin extends User
+    +updateAccessRights()
+    +updateProfile()
+    +updateUserData()
+    +modifyUserState(UserState state)
+    +deleteUserData()
+    +addUserData(Customer customer)
+    +getUserData()
+
+--> Payment
+    -String id
+    -paid : Date
+    -paymentMode : PaymentType
+
+    +getId()
+    +getDate()
+    +getPaymentMode()
+
+--> Order
+    -long orderNumber
+    -Date orderDate 
+    -Date shippedDate
+    -status : OrderStatus
+    -int quantity
+    -double price 
+
+    +getOrderNumber()
+    +getOrderDate()
+    +getShippedDate()
+    +setShippedDate(Date shippedDate)
+    +getOrderStatus()
+    +setOrderStatus(OrderStatus status);
+    +getQuantity()
+    +getPrice()
+
+--> Delivery extends Order 
+    -deliveryType : DeliveryMode
+    
+    +getDeliverytype()
+    +setDeliverytype(DeliveryMode deliveryType)
+    +cancelDelivery()
+    +setOrderStatus(OrderStatus status)
+
+--> Product implements InventoryDataDAO
+    -String productId 
+    -String productName 
+    -String supplier 
+    -int availableQty 
+    -double costPrice 
+    -double sellingPrice 
+
+    +getProductId()
+    +getProductName()
+    +getSupplier()
+    +getAvailableQty()
+    +getCostPrice()
+    +getSellingPrice()
+    +setSellingPrice(double price)
+    +getItems()
+    +updateItems()
+    +addItems()
+    +deleteItems()

@@ -1,0 +1,20 @@
+Student Management System
+
+Entity -->   Student
+            =========
+Attributes-->Student_Name
+             Student_ID
+             Student_DOB
+             Student_Gender 
+             Student_Contact Details 
+             Student_Email
+             Student_Address
+                       
+
+Entity-->     Courses
+Attributes--> Course ID, Name, Type, Duration, Course Login<---Sub Entity Of Entity Course
+                                                               Attributes of Sub Entity--Login--> Login ID
+                                                                                                 Login Username 
+                                                                                                 Login Password 
+Entity-->    Fees
+Attributes-->Fee Course ID, Amount, Payment type   
